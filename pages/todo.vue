@@ -11,8 +11,12 @@
 
     <hr/>
 
+    <input type="checkbox" v-model="displayFlg" />
+    完了したものを非表示にする
+    <hr/>
+
     <div class="list-area">
-      <div v-for="(task, index) in tasks" :key="index">
+      <div v-for="(task, index) in displayTasks" :key="index">
         <div :class="{'todo': true, 'finish': task.finishFlg}">
           <input type="checkbox" v-model="task.finishFlg">
           <span class="task-title">
@@ -32,6 +36,7 @@ export default {
   data() {
     return {
       addTitle: '',
+      displayFlg: false,
       tasks: [{
         title: 'サンプル',
         finishFlg: false
@@ -48,6 +53,17 @@ export default {
     },
     onClickDelete(index) {
       this.tasks.splice(index, 1);
+    }
+  },
+  computed: {
+    displayTasks() {
+      return this.tasks.filter(value => {
+        if (!this.displayFlg) {
+          // 全て表示
+          return true
+        }
+        return !value.finishFlg
+      })
     }
   }
 }
