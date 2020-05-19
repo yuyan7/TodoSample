@@ -12,17 +12,18 @@
     <hr/>
 
     <div class="list-area">
-      <div v-for="(task, index) in tasks" :key="index" :class="{'todo': true, 'finish': task.finishFlg}">
-        <input type="checkbox" v-model="task.finishFlg">
-        <span class="task-title">
-          {{ task.title }}
-        </span>
-        <button class="task-right" @click="onClickDelete(index)">
-          削除
-        </button>
+      <div v-for="(task, index) in tasks" :key="index">
+        <div :class="{'todo': true, 'finish': task.finishFlg}">
+          <input type="checkbox" v-model="task.finishFlg">
+          <span class="task-title">
+            {{ task.title }}
+          </span>
+          <button class="task-right" @click="onClickDelete(index)">
+            削除
+          </button>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
